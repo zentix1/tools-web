@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnasTools - All-in-One Utility Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f39c12;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --hover-color: #3498db;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--card-bg-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--card-bg-color);
+            text-align: center;
+            padding: 100px 0;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: var(--card-bg-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .tool-card i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .tool-card h3 {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: var(--text-color);
+            color: var(--card-bg-color);
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer a {
+            color: var(--card-bg-color);
+            text-decoration: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg-color);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .tool-content {
+            margin-top: 20px;
+        }
+
+        input, textarea, button, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: var(--card-bg-color);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--hover-color);
+        }
+
+        #qrCode, #pieChart, #barChart {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #colorPicker {
+            height: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .tool-card {
+                padding: 15px;
+            }
+
+            .tool-card i {
+                font-size: 36px;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo"><i class="bi bi-tools"></i>AnasTools</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tools">Tools</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Welcome to AnasTools</h1>
+            <p>Your all-in-one utility website for daily tasks and quick solutions.</p>
+        </div>
+    </section>
+
+    <section id="tools" class="container">
+        <div class="tools-grid">
+            <!-- Tool cards will be dynamically generated here -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 AnasTools. All rights reserved. | <a href="https://discord.gg/example" target="_blank">Join our Discord</a></p>
+            <p>Designed by WebSparks AI</p>
+        </div>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalContent" class="tool-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const tools = [
+            { name: "Password Generator", icon: "key-fill", function: generatePassword },
+            { name: "QR Code Generator", icon: "qr-code", function: generateQRCode },
+            { name: "Color Picker", icon: "palette-fill", function: showColorPicker },
+            { name: "Unit Converter", icon: "arrow-left-right", function: showUnitConverter },
+            { name: "Age Calculator", icon: "calendar-date", function: calculateAge },
+            { name: "Lorem Ipsum Generator", icon: "file-text", function: generateLoremIpsum },
+            { name: "JSON Formatter", icon: "braces", function: formatJSON },
+            { name: "Text Case Converter", icon: "type", function: convertTextCase },
+            { name: "MD5 Hash Generator", icon: "shield-lock", function: generateMD5Hash },
+            { name: "Stopwatch & Timer", icon: "stopwatch", function: showStopwatch },
+            { name: "RGB to HEX Converter", icon: "palette2", function: convertRGBtoHEX },
+            { name: "Find & Replace Text", icon: "search", function: findAndReplaceText },
+            { name: "Pie Chart Generator", icon: "pie-chart-fill", function: generatePieChart },
+            { name: "Bar Chart Generator", icon: "bar-chart-fill", function: generateBarChart },
+            { name: "Data Usage Tracker", icon: "graph-up", function: trackDataUsage },
+            { name: "Text to Speech", icon: "volume-up-fill", function: textToSpeech },
+            { name: "Base64 Encoder/Decoder", icon: "code-square", function: base64EncodeDecode },
+            { name: "BMI Calculator", icon: "person-bounding-box", function: calculateBMI },
+            { name: "Character Counter", icon: "123", function: countCharacters },
+            { name: "Number to Words Converter", icon: "translate", function: numberToWords },
+            { name: "Simple Calculator", icon: "calculator", function: simpleCalculator },
+            { name: "Time Difference Calculator", icon: "clock-history", function: calculateTimeDifference },
+            { name: "Word Scrambler", icon: "shuffle", function: scrambleWords },
+            { name: "Mirror Text Generator", icon: "symmetry-vertical", function: generateMirrorText },
+            { name: "Typing Speed Test", icon: "keyboard", function: typingSpeedTest },
+            { name: "Sentence Reverser", icon: "arrow-counterclockwise", function: reverseSentence },
+            { name: "Text Encryption/Decryption", icon: "lock", function: encryptDecryptText },
+            { name: "Uppercase to Small Caps Converter", icon: "fonts", function: convertToSmallCaps },
+            { name: "Percentage Calculator", icon: "percent", function: calculatePercentage },
+            { name: "Random Dice Roller", icon: "dice-5", function: rollDice }
+        ];
+
+        const toolsGrid = document.querySelector('.tools-grid');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+        const closeBtn = document.querySelector('.close');
+
+        tools.forEach(tool => {
+            const card = document.createElement('div');
+            card.className = 'tool-card';
+            card.innerHTML = `
+                <i class="bi bi-${tool.icon}"></i>
+                <h3>${tool.name}</h3>
+            `;
+            card.addEventListener('click', () => openModal(tool));
+            toolsGrid.appendChild(card);
+        });
+
+        function openModal(tool) {
+            modalTitle.textContent = tool.name;
+            modalContent.innerHTML = '';
+            tool.function();
+            modal.style.display = 'block';
+        }
+
+        closeBtn.onclick = () => modal.style.display = 'none';
+        window.onclick = (event) => {
+            if (event.target == modal) modal.style.display = 'none';
+        }
+
+        // Tool Functions
+        function generatePassword() {
+            modalContent.innerHTML = `
+                <input type="number" id="passwordLength" min="8" max="32" value="12" placeholder="Password Length">
+                <button onclick="generateRandomPassword()">Generate Password</button>
+                <input type="text" id="generatedPassword" readonly>
+            `;
+        }
+
+        function generateRandomPassword() {
+            const length = document.getElementById('passwordLength').value;
+            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+            document.getElementById('generatedPassword').value = password;
+        }
+
+        function generateQRCode() {
+            modalContent.innerHTML = `
+                <input type="text" id="qrText" placeholder="Enter text for QR code">
+                <button onclick="createQRCode()">Generate QR Code</button>
+                <div id="qrCode"></div>
+            `;
+        }
+
+        function createQRCode() {
+            const text = document.getElementById('qrText').value;
+            const qr = new QRCode(document.getElementById("qrCode"), {
+                text: text,
+                width: 128,
+                height: 128
+            });
+        }
+
+        function showColorPicker() {
+            modalContent.innerHTML = `
+                <input type="color" id="colorPicker">
+                <input type="text" id="hexValue" readonly>
+                <input type="text" id="rgbValue" readonly>
+            `;
+            const colorPicker = document.getElementById('colorPicker');
+            const hexValue = document.getElementById('hexValue');
+            const rgbValue = document.getElementById('rgbValue');
+
+            colorPicker.addEventListener('input', updateColorValues);
+            updateColorValues();
+
+            function updateColorValues() {
+                const color = colorPicker.value;
+                hexValue.value = color;
+                const r = parseInt(color.substr(1,2), 16);
+                const g = parseInt(color.substr(3,2), 16);
+                const b = parseInt(color.substr(5,2), 16);
+                rgbValue.value = `rgb(${r}, ${g}, ${b})`;
+            }
+        }
+
+        function showUnitConverter() {
+            modalContent.innerHTML = `
+                <select id="conversionType">
+                    <option value="length">Length</option>
+                    <option value="weight">Weight</option>
+                    <option value="temperature">Temperature</option>
+                </select>
+                <input type="number" id="inputValue" placeholder="Enter value">
+                <select id="fromUnit"></select>
+                <select id="toUnit"></select>
+                <button onclick="convert()">Convert</button>
+                <input type="text" id="result" readonly>
+            `;
+
+            const conversionType = document.getElementById('conversionType');
+            const fromUnit = document.getElementById('fromUnit');
+            const toUnit = document.getElementById('toUnit');
+
+            const units = {
+                length: ['meters', 'kilometers', 'feet', 'inches'],
+                weight: ['kilograms', 'grams', 'pounds', 'ounces'],
+                temperature: ['Celsius', 'Fahrenheit', 'Kelvin']
+            };
+
+            function updateUnitOptions() {
+                const selectedType = conversionType.value;
+                fromUnit.innerHTML = '';
+                toUnit.innerHTML = '';
+                units[selectedType].forEach(unit => {
+                    fromUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
+                    toUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
+                });
+            }
+
+            conversionType.addEventListener('change', updateUnitOptions);
+            updateUnitOptions();
+        }
+
+        function convert() {
+            const inputValue = parseFloat(document.getElementById('inputValue').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            const conversionType = document.getElementById('conversionType').value;
+
+            let result;
+
+            if (conversionType === 'length') {
+                const meterValues = { meters: 1, kilometers: 1000, feet: 0.3048, inches: 0.0254 };
+                const meters = inputValue * meterValues[fromUnit];
+                result = meters / meterValues[toUnit];
+            } else if (conversionType === 'weight') {
+                const gramValues = { kilograms: 1000, grams: 1, pounds: 453.592, ounces: 28.3495 };
+                const grams = inputValue * gramValues[fromUnit];
+                result = grams / gramValues[toUnit];
+            } else if (conversionType === 'temperature') {
+                if (fromUnit === 'Celsius' && toUnit === 'Fahrenheit') {
+                    result = (inputValue * 9/5) + 32;
+                } else if (fromUnit === 'Fahrenheit' && toUnit === 'Celsius') {
+                    result = (inputValue - 32) * 5/9;
+                } else if (fromUnit === 'Celsius' && toUnit === 'Kelvin') {
+                    result = inputValue + 273.15;
+                } else if (fromUnit === 'Kelvin' && toUnit === 'Celsius') {
+                    result = inputValue - 273.15;
+                } else if (fromUnit === 'Fahrenheit' && toUnit === 'Kelvin') {
+                    result = (inputValue - 32) * 5/9 + 273.15;
+                } else if (fromUnit === 'Kelvin' && toUnit === 'Fahrenheit') {
+                    result = (inputValue - 273.15) * 9/5 + 32;
+                } else {
+                    result = inputValue;
+                }
+            }
+
+            document.getElementById('result').value = result.toFixed(2);
+        }
+
+        function calculateAge() {
+            modalContent.innerHTML = `
+                <input type="date" id="birthdate">
+                <button onclick="calcAge()">Calculate Age</button>
+                <input type="text" id="ageResult" readonly>
+            `;
+        }
+
+        function calcAge() {
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            const today = new Date();
+            let age = today.getFullYear() - birthdate.getFullYear();
+            const monthDiff = today.getMonth() - birthdate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+                age--;
+            }
+            document.getElementById('ageResult').value = `${age} years old`;
+        }
+
+        function generateLoremIpsum() {
+            modalContent.innerHTML = `
+                <input type="number" id="paragraphCount" min="1" max="5" value="1" placeholder="Number of paragraphs">
+                <button onclick="genLoremIpsum()">Generate Lorem Ipsum</button>
+                <textarea id="loremIpsumResult" rows="10" readonly></textarea>
+            `;
+        }
+
+        function genLoremIpsum() {
+            const paragraphCount = document.getElementById('paragraphCount').value;
+            const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            let result = "";
+            for (let i = 0; i < paragraphCount; i++) {
+                result += loremIpsum + "\n\n";
+            }
+            document.getElementById('loremIpsumResult').value = result.trim();
+        }
+
+        function formatJSON() {
+            modalContent.innerHTML = `
+                <textarea id="jsonInput" rows="10" placeholder="Enter JSON here"></textarea>
+                <button onclick="formatJSONText()">Format JSON</button>
+                <textarea id="jsonResult" rows="10" readonly></textarea>
+            `;
+        }
+
+        function formatJSONText() {
+            const jsonInput = document.getElementById('jsonInput').value;
+            try {
+                const formatted = JSON.stringify(JSON.parse(jsonInput), null, 2);
+                document.getElementById('jsonResult').value = formatted;
+            } catch (error) {
+                document.getElementById('jsonResult').value = "Invalid JSON: " + error.message;
+            }
+        }
+
+        function convertTextCase() {
+            modalContent.innerHTML = `
+                <textarea id="textInput" rows="5" placeholder="Enter text here"></textarea>
+                <button onclick="convertToUppercase()">To Uppercase</button>
+                <button onclick="convertToLowercase()">To Lowercase</button>
+                <button onclick="convertToTitleCase()">To Title Case</button>
+                <textarea id="textResult" rows="5" readonly></textarea>
+            `;
+        }
+
+        function convertToUppercase() {
+            const text = document.getElementById('textInput').value;
+            document.getElementById('textResult').value = text.toUpperCase();
+        }
+
+        function convertToLowercase() {
+            const text = document.getElementById('textInput').value;
+            document.getElementById('textResult').value = text.toLowerCase();
+        }
+
+        function convertToTitleCase() {
+            const text = document.getElementById('textInput').value;
+            const titleCase = text.toLowerCase().split(' ').map(word => {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+            }).join(' ');
+            document.getElementById('textResult').value = titleCase;
+        }
+
+        function generateMD5Hash() {
+            modalContent.innerHTML = `
+                <input type="text" id="md5Input" placeholder="Enter text to hash">
+                <button onclick="generateMD5()">Generate MD5 Hash</button>
+                <input type="text" id="md5Result" readonly>
+            `;
+        }
+
+        function generateMD5() {
+            const input = document.getElementById('md5Input').value;
+            const md5 = CryptoJS.MD5(input);
+            document.getElementById('md5Result').value = md5.toString();
+        }
+
+        function showStopwatch() {
+            modalContent.innerHTML = `
+                <div id="stopwatch">00:00:00</div>
+                <button onclick="startStopwatch()">Start</button>
+                <button onclick="stopStopwatch()">Stop</button>
+                <button onclick="resetStopwatch()">Reset</button>
+            `;
+            let stopwatchInterval;
+            let stopwatchTime = 0;
+
+            window.startStopwatch = function() {
+                clearInterval(stopwatchInterval);
+                stopwatchInterval = setInterval(updateStopwatch, 1000);
+            }
+
+            window.stopStopwatch = function() {
+                clearInterval(stopwatchInterval);
+            }
+
+            window.resetStopwatch = function() {
+                clearInterval(stopwatchInterval);
+                stopwatchTime = 0;
+                updateStopwatchDisplay();
+            }
+
+            function updateStopwatch() {
+                stopwatchTime++;
+                updateStopwatchDisplay();
+            }
+
+            function updateStopwatchDisplay() {
+                const hours = Math.floor(stopwatchTime / 3600);
+                const minutes = Math.floor((stopwatchTime % 3600) / 60);
+                const seconds = stopwatchTime % 60;
+                document.getElementById('stopwatch').textContent = 
+                    `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+            }
+
+            function pad(num) {
+                return num.toString().padStart(2, '0');
+            }
+        }
+
+        function convertRGBtoHEX() {
+            modalContent.innerHTML = `
+                <input type="number" id="redValue" min="0" max="255" placeholder="Red (0-255)">
+                <input type="number" id="greenValue" min="0" max="255" placeholder="Green (0-255)">
+                <input type="number" id="blueValue" min="0" max="255" placeholder="Blue (0-255)">
+                <button onclick="rgbToHex()">Convert to HEX</button>
+                <input type="text" id="hexResult" readonly>
+            `;
+        }
+
+        function rgbToHex() {
+            const r = parseInt(document.getElementById('redValue').value);
+            const g = parseInt(document.getElementById('greenValue').value);
+            const b = parseInt(document.getElementById('blueValue').value);
+            const hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+            document.getElementById('hexResult').value = hex;
+        }
+
+        function findAndReplaceText() {
+            modalContent.innerHTML = `
+                <textarea id="originalText" rows="5" placeholder="Enter original text"></textarea>
+                <input type="text" id="findText" placeholder="Text to find">
+                <input type="text" id="replaceText" placeholder="Replace with">
+                <button onclick="replaceText()">Find and Replace</button>
+                <textarea id="resultText" rows="5" readonly></textarea>
+            `;
+        }
+
+        function replaceText() {
+            const originalText = document.getElementById('originalText').value;
+            const findText = document.getElementById('findText').value;
+            const replaceText = document.getElementById('replaceText').value;
+            const result = originalText.replace(new RegExp(findText, 'g'), replaceText);
+            document.getElementById('resultText').value = result;
+        }
+
+        function generatePieChart() {
+            modalContent.innerHTML = `
+                <input type="text" id="pieLabels" placeholder="Labels (comma-separated)">
+                <input type="text" id="pieValues" placeholder="Values (comma-separated)">
+                <button onclick="drawPieChart()">Generate Pie Chart</button>
+                <canvas id="pieChart" width="300" height="300"></canvas>
+            `;
+        }
+
+        function drawPieChart() {
+            const labels = document.getElementById('pieLabels').value.split(',');
+            const values = document.getElementById('pieValues').value.split(',').map(Number);
+            const canvas = document.getElementById('pieChart');
+            const ctx = canvas.getContext('2d');
+            const total = values.reduce((a, b) => a + b, 0);
+            let startAngle = 0;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < values.length; i++) {
+                const sliceAngle = 2 * Math.PI * values[i] / total;
+                ctx.fillStyle = getRandomColor();
+                ctx.beginPath();
+                ctx.moveTo(150, 150);
+                ctx.arc(150, 150, 100, startAngle, startAngle + sliceAngle);
+                ctx.closePath();
+                ctx.fill();
+                startAngle += sliceAngle;
+            }
+        }
+
+        function getRandomColor() {
+            return '#' + Math.floor(Math.random()*16777215).toString(16);
+        }
+
+        function generateBarChart() {
+            modalContent.innerHTML = `
+                <input type="text" id="barLabels" placeholder="Labels (comma-separated)">
+                <input type="text" id="barValues" placeholder="Values (comma-separated)">
+                <button onclick="drawBarChart()">Generate Bar Chart</button>
+                <canvas id="barChart" width="300" height="200"></canvas>
+            `;
+        }
+
+        function drawBarChart() {
+            const labels = document.getElementById('barLabels').value.split(',');
+            const values = document.getElementById('barValues').value.split(',').map(Number);
+            const canvas = document.getElementById('barChart');
+            const ctx = canvas.getContext('2d');
+            const maxValue = Math.max(...values);
+            const barWidth = canvas.width / labels.length;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < values.length; i++) {
+                const barHeight = (values[i] / maxValue) * canvas.height;
+                ctx.fillStyle = getRandomColor();
+                ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 5, barHeight);
+            }
+        }
+
+        function trackDataUsage() {
+            modalContent.innerHTML = `
+                <input type="date" id="usageDate">
+                <input type="number" id="dataUsage" placeholder="Data usage in MB">
+                <button onclick="addDataUsage()">Add Data Usage</button>
+                <div id="usageHistory"></div>
+            `;
+            displayDataUsage();
+        }
+
+        function addDataUsage() {
+            const date = document.getElementById('usageDate').value;
+            const usage = document.getElementById('dataUsage').value;
+            if (date && usage) {
+                let dataUsage = JSON.parse(localStorage.getItem('dataUsage')) || {};
+                dataUsage[date] = (dataUsage[date] || 0) + parseFloat(usage);
+                localStorage.setItem('dataUsage', JSON.stringify(dataUsage));
+                displayDataUsage();
+            }
+        }
+
+        function displayDataUsage() {
+            const dataUsage = JSON.parse(localStorage.getItem('dataUsage')) || {};
+            let html = '<h3>Data Usage History</h3>';
+            for (let date in dataUsage) {
+                html += `<p>${date}: ${dataUsage[date]} MB</p>`;
+            }
+            document.getElementById('usageHistory').innerHTML = html;
+        }
+
+        function textToSpeech() {
+            modalContent.innerHTML = `
+                <textarea id="speechText" rows="5" placeholder="Enter text to speak"></textarea>
+                <button onclick="speak()">Speak</button>
+            `;
+        }
+
+        function speak() {
+            const text = document.getElementById('speechText').value;
+            constutterance = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function base64EncodeDecode() {
+            modalContent.innerHTML = `
+                <textarea id="base64Input" rows="5" placeholder="Enter text"></textarea>
+                <button onclick="encodeBase64()">Encode</button>
+                <button onclick="decodeBase64()">Decode</button>
+                <textarea id="base64Result" rows="5" readonly></textarea>
+            `;
+        }
+
+        function encodeBase64() {
+            const input = document.getElementById('base64Input').value;
+            const encoded = btoa(input);
+            document.getElementById('base64Result').value = encoded;
+        }
+
+        function decodeBase64() {
+            const input = document.getElementById('base64Input').value;
+            try {
+                const decoded = atob(input);
+                document.getElementById('base64Result').value = decoded;
+            } catch (error) {
+                document.getElementById('base64Result').value = "Invalid Base64 input";
+            }
+        }
+
+        function calculateBMI() {
+            modalContent.innerHTML = `
+                <input type="number" id="weight" placeholder="Weight (kg)">
+                <input type="number" id="height" placeholder="Height (cm)">
+                <button onclick="calcBMI()">Calculate BMI</button>
+                <input type="text" id="bmiResult" readonly>
+            `;
+        }
+
+        function calcBMI() {
+            const weight = document.getElementById('weight').value;
+            const height = document.getElementById('height').value / 100; // convert cm to m
+            const bmi = weight / (height * height);
+            let category;
+            if (bmi < 18.5) category = "Underweight";
+            else if (bmi < 25) category = "Normal weight";
+            else if (bmi < 30) category = "Overweight";
+            else category = "Obese";
+            document.getElementById('bmiResult').value = `BMI: ${bmi.toFixed(1)} - ${category}`;
+        }
+
+        function countCharacters() {
+            modalContent.innerHTML = `
+                <textarea id="charCountText" rows="5" placeholder="Enter text"></textarea>
+                <button onclick="countChars()">Count</button>
+                <div id="charCountResult"></div>
+            `;
+        }
+
+        function countChars() {
+            const text = document.getElementById('charCountText').value;
+            const charCount = text.length;
+            const wordCount = text.trim().split(/\s+/).length;
+            document.getElementById('charCountResult').innerHTML = `
+                Characters: ${charCount}<br>
+                Words: ${wordCount}
+            `;
+        }
+
+        function numberToWords() {
+            modalContent.innerHTML = `
+                <input type="number" id="numberInput" placeholder="Enter a number">
+                <button onclick="convertNumberToWords()">Convert</button>
+                <input type="text" id="wordsResult" readonly>
+            `;
+        }
+
+        function convertNumberToWords() {
+            const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+            const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+            const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+
+            function convert(n) {
+                if (n < 10) return ones[n];
+                if (n < 20) return teens[n - 10];
+                if (n < 100) return tens[Math.floor(n / 10)] + (n % 10 !== 0 ? '-' + ones[n % 10] : '');
+                if (n < 1000) return ones[Math.floor(n / 100)] + ' hundred' + (n % 100 !== 0 ? ' and ' + convert(n % 100) : '');
+                return convert(Math.floor(n / 1000)) + ' thousand' + (n % 1000 !== 0 ? ' ' + convert(n % 1000) : '');
+            }
+
+            const number = parseInt(document.getElementById('numberInput').value);
+            document.getElementById('wordsResult').value = convert(number);
+        }
+
+        function simpleCalculator() {
+            modalContent.innerHTML = `
+                <input type="number" id="num1" placeholder="Number 1">
+                <select id="operator">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">×</option>
+                    <option value="/">÷</option>
+                </select>
+                <input type="number" id="num2" placeholder="Number 2">
+                <button onclick="calculate()">Calculate</button>
+                <input type="text" id="calcResult" readonly>
+            `;
+        }
+
+        function calculate() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const operator = document.getElementById('operator').value;
+            let result;
+            switch(operator) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/': result = num1 / num2; break;
+            }
+            document.getElementById('calcResult').value = result;
+        }
+
+        function calculateTimeDifference() {
+            modalContent.innerHTML = `
+                <input type="datetime-local" id="datetime1">
+                <input type="datetime-local" id="datetime2">
+                <button onclick="calcTimeDiff()">Calculate Difference</button>
+                <input type="text" id="timeDiffResult" readonly>
+            `;
+        }
+
+        function calcTimeDiff() {
+            const date1 = new Date(document.getElementById('datetime1').value);
+            const date2 = new Date(document.getElementById('datetime2').value);
+            const diffMs = Math.abs(date2 - date1);
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('timeDiffResult').value = `${diffDays} days, ${diffHours} hours, ${diffMinutes} minutes`;
+        }
+
+        function scrambleWords() {
+            modalContent.innerHTML = `
+                <textarea id="scrambleInput" rows="5" placeholder="Enter text to scramble"></textarea>
+                <button onclick="scrambleText()">Scramble</button>
+                <textarea id="scrambleResult" rows="5" readonly></textarea>
+            `;
+        }
+
+        function scrambleText() {
+            const text = document.getElementById('scrambleInput').value;
+            const scrambled = text.split(' ').map(word => {
+                if (word.length <= 3) return word;
+                const middle = word.slice(1, -1).split('').sort(() => Math.random() - 0.5).join('');
+                return word[0] + middle + word[word.length - 1];
+            }).join(' ');
+            document.getElementById('scrambleResult').value = scrambled;
+        }
+
+        function generateMirrorText() {
+            modalContent.innerHTML = `
+                <input type="text" id="mirrorInput" placeholder="Enter text">
+                <button onclick="mirrorText()">Generate Mirror Text</button>
+                <input type="text" id="mirrorResult" readonly>
+            `;
+        }
+
+        function mirrorText() {
+            const text = document.getElementById('mirrorInput').value;
+            const mirrored = text.split('').reverse().join('');
+            document.getElementById('mirrorResult').value = mirrored;
+        }
+
+        function typingSpeedTest() {
+            modalContent.innerHTML = `
+                <div id="typingPrompt"></div>
+                <textarea id="typingInput" rows="5" placeholder="Start typing here..."></textarea>
+                <button onclick="startTypingTest()">Start Test</button>
+                <div id="typingResult"></div>
+            `;
+        }
+
+        let typingStartTime, typingEndTime, typingPrompt;
+
+        function startTypingTest() {
+            const prompts = [
+                "The quick brown fox jumps over the lazy dog.",
+                "To be or not to be, that is the question.",
+                "All that glitters is not gold.",
+                "A journey of a thousand miles begins with a single step."
+            ];
+            typingPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+            document.getElementById('typingPrompt').textContent = typingPrompt;
+            document.getElementById('typingInput').value = '';
+            typingStartTime = new Date();
+            document.getElementById('typingInput').focus();
+            document.getElementById('typingInput').onkeyup = checkTypingCompletion;
+        }
+
+        function checkTypingCompletion() {
+            const typedText = document.getElementById('typingInput').value;
+            if (typedText === typingPrompt) {
+                typingEndTime = new Date();
+                const timeElapsed = (typingEndTime - typingStartTime) / 1000; // in seconds
+                const wordsTyped = typingPrompt.split(' ').length;
+                const wpm = Math.round((wordsTyped / timeElapsed) * 60);
+                document.getElementById('typingResult').innerHTML = `
+                    Time: ${timeElapsed.toFixed(2)} seconds<br>
+                    Speed: ${wpm} WPM
+                `;
+                document.getElementById('typingInput').onkeyup = null;
+            }
+        }
+
+        function reverseSentence() {
+            modalContent.innerHTML = `
+                <textarea id="sentenceInput" rows="5" placeholder="Enter a sentence"></textarea>
+                <button onclick="reverseWords()">Reverse Sentence</button>
+                <textarea id="reversedSentence" rows="5" readonly></textarea>
+            `;
+        }
+
+        function reverseWords() {
+            const sentence = document.getElementById('sentenceInput').value;
+            const reversed = sentence.split(' ').reverse().join(' ');
+            document.getElementById('reversedSentence').value = reversed;
+        }
+
+        function encryptDecryptText() {
+            modalContent.innerHTML = `
+                <textarea id="cryptText" rows="5" placeholder="Enter text"></textarea>
+                <input type="text" id="cryptKey" placeholder="Enter key">
+                <button onclick="encryptText()">Encrypt</button>
+                <button onclick="decryptText()">Decrypt</button>
+                <textarea id="cryptResult" rows="5" readonly></textarea>
+            `;
+        }
+
+        function encryptText() {
+            const text = document.getElementById('cryptText').value;
+            const key = document.getElementById('cryptKey').value;
+            const encrypted = CryptoJS.AES.encrypt(text, key).toString();
+            document.getElementById('cryptResult').value = encrypted;
+        }
+
+        function decryptText() {
+            const text = document.getElementById('cryptText').value;
+            const key = document.getElementById('cryptKey').value;
+            try {
+                const decrypted = CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
+                document.getElementById('cryptResult').value = decrypted;
+            } catch (error) {
+                document.getElementById('cryptResult').value = "Decryption failed. Check your key.";
+            }
+        }
+
+        function convertToSmallCaps() {
+            modalContent.innerHTML = `
+                <textarea id="smallCapsInput" rows="5" placeholder="Enter text"></textarea>
+                <button onclick="toSmallCaps()">Convert to Small Caps</button>
+                <textarea id="smallCapsResult" rows="5" readonly></textarea>
+            `;
+        }
+
+        function toSmallCaps() {
+            const text = document.getElementById('smallCapsInput').value;
+            const smallCaps = text.split('').map(char => {
+                const upper = char.toUpperCase();
+                return upper === char ? char : String.fromCharCode(char.charCodeAt(0) + 8272);
+            }).join('');
+            document.getElementById('smallCapsResult').value = smallCaps;
+        }
+
+        function calculatePercentage() {
+            modalContent.innerHTML = `
+                <input type="number" id="percentValue" placeholder="Percentage">
+                <input type="number" id="totalValue" placeholder="Total value">
+                <button onclick="calcPercentage()">Calculate</button>
+                <input type="text" id="percentageResult" readonly>
+            `;
+        }
+
+        function calcPercentage() {
+            const percent = parseFloat(document.getElementById('percentValue').value);
+            const total = parseFloat(document.getElementById('totalValue').value);
+            const result = (percent / 100) * total;
+            document.getElementById('percentageResult').value = result.toFixed(2);
+        }
+
+        function rollDice() {
+            modalContent.innerHTML = `
+                <button onclick="rollTheDice()">Roll Dice</button>
+                <div id="diceResult" style="font-size: 48px; margin-top: 20px;"></div>
+            `;
+        }
+
+        function rollTheDice() {
+            const result = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('diceResult').textContent = result;
+        }
+
+        // Load required libraries
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js';
+        document.head.appendChild(script);
+
+        const qrScript = document.createElement('script');
+        qrScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+        document.head.appendChild(qrScript);
+    </script>
+</body>
+</html>
